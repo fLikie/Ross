@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
         bottom_nav.setOnNavigationItemSelectedListener {
             if (bottom_nav.selectedItemId != it.itemId) {
                 when (it.itemId) {
-                    R.id.acceptedFragment -> navController.navigate(R.id.go_to_accepted)
-                    R.id.formFragment -> navController.navigate(R.id.go_to_form)
-                    R.id.forumFragment -> navController.navigate(R.id.go_to_forum)
-                    R.id.documentationsFragment -> navController.navigate(R.id.go_to_docs)
-                    R.id.reestrFragment -> navController.navigate(R.id.go_to_reestr)
+                    R.id.menu_block_one -> navController.navigate(R.id.go_to_forum)
+                    R.id.menu_block_two -> navController.navigate(R.id.go_to_form)
+                    R.id.menu_block_three -> navController.navigate(R.id.go_to_reestr)
+                    R.id.menu_block_four -> navController.navigate(R.id.go_to_accepted)
+                    R.id.menu_block_five -> navController.navigate(R.id.go_to_docs)
                 }
             }
             true
