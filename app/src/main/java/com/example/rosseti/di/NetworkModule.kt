@@ -1,6 +1,7 @@
 package com.example.rosseti.di
 
 import android.content.Context
+import com.example.rosseti.api.LoginService
 import com.example.rosseti.api.ProfileService
 import com.example.rosseti.data.SessionManager
 import com.google.gson.Gson
@@ -11,6 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -20,8 +22,11 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
+    fun provideOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        return OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+    }
 
     @Provides
     @Singleton
@@ -43,4 +48,8 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideProfileService(retrofit: Retrofit): ProfileService = retrofit.create(ProfileService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideLoginService(retrofit: Retrofit) = retrofit.create(LoginService::class.java)
 }

@@ -15,5 +15,5 @@ data class Form(
     var expenditures: List<Spending> = emptyList(),
     var steps: List<ImplementationStep> = emptyList(),
     var doesSaveMoney: Boolean = false,
-    var rewards: Map<User, Short>
+    var rewards: Map<User, Short> = emptyMap()
 )

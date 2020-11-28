@@ -47,7 +47,12 @@ class Generator(private val form: Form, private val context: Context) {
                         text.getOrNull(1) ?: ""
                     }
                     Holders.AUTHOR_REWARD -> {
-                        getCurrentUserIfPresent(text)?.desiredRewardInPercent?.toString() ?: ""
+                        val index = getIndexIfPresent(text)
+                        if (index != null) {
+                            form.rewards[form.authors[index]]?.toString() ?: ""
+                        } else {
+                            ""
+                        }
                     }
                     Holders.POSITION -> {
                         getCurrentUserIfPresent(text)?.position ?: ""
