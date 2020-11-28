@@ -4,8 +4,7 @@ import android.content.Context
 import android.os.Environment
 import com.example.rosseti.R
 import com.example.rosseti.application.Form
-import com.example.rosseti.entities.User
-import com.google.android.material.transition.Hold
+import com.example.rosseti.domain.entities.User
 import org.apache.poi.xwpf.usermodel.XWPFDocument
 import org.apache.poi.xwpf.usermodel.XWPFParagraph
 import java.io.File
@@ -68,7 +67,7 @@ class Generator(private val form: Form, private val context: Context) {
                     Holders.EXPERIENCE -> {
                         val user = getCurrentUserIfPresent(text)
                         val format = SimpleDateFormat("yyyy")
-                        val date = user?.startOfWork
+                        val date = user?.dateOfEmployment
                         date?.let { "С ${format.format(date)} года" } ?: ""
                     }
                     Holders.SHORT_NAME -> { form.shortname }

@@ -69,8 +69,7 @@ class CreateApplicationFragment : Fragment() {
             }
         }
         binding.helpLayoutButtonContinue.setOnClickListener {
-            val mCurrentQuestion = currentQuestion
-            when (mCurrentQuestion) {
+            when (currentQuestion) {
                 is Question.WriteQuestion -> {
                     val text = binding.helpLayoutEdittextAnswer.text?.toString() ?: ""
                     binding.helpLayoutEdittextAnswer.setText("")

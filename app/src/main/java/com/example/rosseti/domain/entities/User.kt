@@ -1,4 +1,4 @@
-package com.example.rosseti.entities
+package com.example.rosseti.domain.entities
 
 import com.example.rosseti.Education
 import java.util.*
@@ -13,8 +13,7 @@ data class User(
     val organizationName: String,
     val structureName: String,
     val education: Education,
-    val startOfWork: Date, // когда начал работать в электрике
-    val desiredRewardInPercent: Short
+    val dateOfEmployment: Date, // когда начал работать в электрике
 ) {
     val fullName: String
         get() = "$lastName $firstName" + if (!patronymic.isNullOrBlank()) " $patronymic" else ""

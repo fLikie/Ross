@@ -1,6 +1,6 @@
 package com.example.rosseti.application
 
-import com.example.rosseti.entities.User
+import com.example.rosseti.domain.entities.User
 import java.util.*
 
 data class Form(
@@ -15,4 +15,5 @@ data class Form(
     var expenditures: List<Spending> = emptyList(),
     var steps: List<ImplementationStep> = emptyList(),
     var doesSaveMoney: Boolean = false,
+    var rewards: Map<User, Short>
 )
