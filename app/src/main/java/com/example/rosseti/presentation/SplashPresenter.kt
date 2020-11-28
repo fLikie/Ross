@@ -1,5 +1,6 @@
 package com.example.rosseti.presentation
 
+import com.example.rosseti.api.ProfileApi
 import com.example.rosseti.data.LoginRepository
 import com.example.rosseti.data.SessionManager
 import dagger.hilt.android.scopes.ActivityScoped
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @ActivityScoped
 class SplashPresenter @Inject constructor(
     private val sessionManager: SessionManager,
-    private val loginRepository: LoginRepository
+    private val profileApi: ProfileApi
 ) : MvpPresenter<SplashView>() {
 
     override fun onFirstViewAttach() {
@@ -40,7 +41,7 @@ class SplashPresenter @Inject constructor(
         var success = false
         presenterScope.launch(Dispatchers.Default) {
             success = try {
-                loginRepository.getProfile()
+                profileApi.getProfile()
                 true
             } catch (e: Exception) {
                 false

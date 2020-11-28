@@ -28,6 +28,7 @@ class AuthorizationPresenter @Inject constructor(
         if (password.isEmpty()) {
             viewState.showToast("Enter password")
         }
+        viewState.showLoading(true)
         presenterScope.launch(Dispatchers.Default) {
             val token = loginApi.login(LoginCredentials(login, password))
             if (token.isNotBlank()) {
@@ -35,6 +36,7 @@ class AuthorizationPresenter @Inject constructor(
                 topicsApi.getAllTopics()
             }
             withContext(Dispatchers.Main) {
+                viewState.showLoading(false)
                 if (token.isNotBlank()) {
                     viewState.goToMain()
                 } else {
