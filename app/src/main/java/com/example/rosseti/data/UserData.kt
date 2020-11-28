@@ -1,6 +1,6 @@
 package com.example.rosseti.data
 
-import com.example.rosseti.Education
+import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 
 data class UserData(
@@ -9,9 +9,9 @@ data class UserData(
     @SerializedName("surname") val lastName: String,
     @SerializedName("patronymic") val patronymic: String?, //отчество
     @SerializedName("date_of_birth") val birthdate: String,
-    @SerializedName("post") val position: String,
-    @SerializedName("organization") val organizationName: String,
-    @SerializedName("structure") val structureName: String,
-    @SerializedName("education") val education: Education,
+    @SerializedName("post") val position: JsonObject,
+    @SerializedName("organization") val organizationName: JsonObject,
+    @SerializedName("structure") val structureName: JsonObject,
+    @SerializedName("education") val education: JsonObject,
     @SerializedName("date_of_employment") val dateOfEmployment: String, // когда начал работать в электрике
 )

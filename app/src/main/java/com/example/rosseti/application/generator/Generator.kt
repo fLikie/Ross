@@ -61,7 +61,7 @@ class Generator(private val form: Form, private val context: Context) {
                         getCurrentUserIfPresent(text)?.structureName ?: ""
                     }
                     Holders.BACKGROUND -> {
-                        getCurrentUserIfPresent(text)?.education?.degree ?: ""
+                        getCurrentUserIfPresent(text)?.education ?: ""
                     }
                     Holders.BIRTH_YEAR -> {
                         val user = getCurrentUserIfPresent(text)

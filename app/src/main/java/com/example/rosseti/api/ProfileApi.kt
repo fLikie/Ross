@@ -2,7 +2,6 @@ package com.example.rosseti.api
 
 import com.example.rosseti.data.SessionManager
 import com.example.rosseti.data.UserData
-import com.example.rosseti.data.mappers.LoginMappers.mapToUser
 import com.example.rosseti.domain.entities.User
 import com.google.gson.Gson
 import javax.inject.Inject
@@ -10,11 +9,16 @@ import javax.inject.Inject
 class ProfileApi @Inject constructor(
     private val profileService: ProfileService,
     private val sessionManager: SessionManager,
-    private val gson: Gson
+    private val gson: Gson,
+    private val user: User
     ) {
 
     suspend fun getProfile(): User {
-        val json = profileService.getProfile(sessionManager.fetchAuthToken()).body()?.result
-        return gson.fromJson(json, UserData::class.java).mapToUser()
+        val jsonBody = profileService.getProfile(sessionManager.fetchAuthToken()).body()
+        if (jsonBody?.has("profile") == true) {
+            user.inflateFromUserData(gson.fromJson(jsonBody.getAsJsonObject("profile"), UserData::class.java))
+        }
+        return user
+
     }
 }

@@ -6,6 +6,6 @@ import javax.inject.Inject
 class LoginRepository @Inject constructor(
     private val profileApi: ProfileApi
 ) {
-    suspend fun getProfile() = profileApi.getProfile()
+
 
 }
