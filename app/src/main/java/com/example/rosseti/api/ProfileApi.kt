@@ -17,6 +17,8 @@ class ProfileApi @Inject constructor(
         val jsonBody = profileService.getProfile(sessionManager.fetchAuthToken()).body()
         if (jsonBody?.has("profile") == true) {
             user.inflateFromUserData(gson.fromJson(jsonBody.getAsJsonObject("profile"), UserData::class.java))
+        } else {
+            error("Не удалось получить профиль")
         }
         return user
 

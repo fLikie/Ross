@@ -1,6 +1,7 @@
 package com.example.rosseti.presentation
 
 import com.example.rosseti.api.LoginApi
+import com.example.rosseti.api.TopicsApi
 import com.example.rosseti.api.posts.LoginCredentials
 import com.example.rosseti.data.SessionManager
 import dagger.hilt.android.scopes.ActivityScoped
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @ActivityScoped
 class AuthorizationPresenter @Inject constructor(
     private val loginApi: LoginApi,
-    private val sessionManager: SessionManager
+    private val topicsApi: TopicsApi,
+    private val sessionManager: SessionManager,
 ) : MvpPresenter<AuthorizationView>() {
 
     fun login(login: String, password: String) {
@@ -28,9 +30,12 @@ class AuthorizationPresenter @Inject constructor(
         }
         presenterScope.launch(Dispatchers.Default) {
             val token = loginApi.login(LoginCredentials(login, password))
+            if (token.isNotBlank()) {
+                sessionManager.saveAuthToken(token)
+                topicsApi.getAllTopics()
+            }
             withContext(Dispatchers.Main) {
                 if (token.isNotBlank()) {
-                    sessionManager.saveAuthToken(token)
                     viewState.goToMain()
                 } else {
                     viewState.showToast("Incorrect login or password")
