@@ -39,13 +39,16 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        new_doc.setOnClickListener {
+            navController.navigate(R.id.go_to_create_app)
+        }
         if (checkWritePermission()) {
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_WRITE);
         }
     }
 
-    fun checkWritePermission(): Boolean {
+    private fun checkWritePermission(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         }
