@@ -5,5 +5,7 @@ import javax.inject.Inject
 
 class TopicsApi @Inject constructor(private val topicsService: TopicsService, private val sessionManager: SessionManager) {
 
-    fun getAllTopics() = topicsService.getAllTopics(sessionManager.fetchAuthToken()!!)
+    fun getAllTopics() {
+        topicsService.getAllTopics(sessionManager.fetchAuthToken()!!)
+    }
 }
