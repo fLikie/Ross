@@ -2,6 +2,8 @@ package com.example.rosseti
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.rosseti.api.LoginApi
 import com.example.rosseti.api.ProfileApi
@@ -19,8 +21,6 @@ import javax.inject.Inject
 class AuthorizationActivity : MvpAppCompatActivity(), AuthorizationView {
 
     @Inject lateinit var loginApi: LoginApi
-    @Inject lateinit var profileApi: ProfileApi
-    @Inject lateinit var sessionManager: SessionManager
 
     @Inject
     lateinit var daggerPresenter: AuthorizationPresenter
@@ -45,5 +45,13 @@ class AuthorizationActivity : MvpAppCompatActivity(), AuthorizationView {
 
     override fun goToMain() {
         startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    override fun showLoading(show: Boolean) {
+        if (show) {
+            progress_bar.visibility = View.VISIBLE
+        } else {
+            progress_bar.visibility = View.GONE
+        }
     }
 }

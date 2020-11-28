@@ -5,8 +5,5 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface AuthorizationView : MvpView {
-    fun showToast(text: String)
-    fun goToMain()
-    fun showLoading(show: Boolean)
+interface ChooseTagsView : MvpView {
 }
