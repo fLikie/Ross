@@ -10,4 +10,8 @@ class ChooseTagsPresenter @Inject constructor(
     private val sessionManager: SessionManager
 ) : MvpPresenter<ChooseTagsView>() {
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.showLoading(true)
+    }
 }

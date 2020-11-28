@@ -6,4 +6,5 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface ChooseTagsView : MvpView {
+    fun showLoading(show: Boolean)
 }
