@@ -4,9 +4,9 @@ import com.example.rosseti.domain.entities.User
 import java.util.*
 
 data class Form(
-    var applicationRegNumber: Long = 0,
+    var applicationRegNumber: Long = 123456,
     var applicationRegDate: Date = Date(),
-    var authors: List<User> = emptyList(),
+    var authors: MutableList<User> = mutableListOf(),
     var shortname: String = "",
     var categories: List<CategoryOfDigitalTransf> = emptyList(),
     var issueDescription: String = "",
@@ -15,5 +15,5 @@ data class Form(
     var expenditures: List<Spending> = emptyList(),
     var steps: List<ImplementationStep> = emptyList(),
     var doesSaveMoney: Boolean = false,
-    var rewards: Map<User, Short> = emptyMap()
+    var rewards: MutableMap<User, String> = mutableMapOf()
 )

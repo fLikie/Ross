@@ -140,4 +140,16 @@ class Generator(private val form: Form, private val context: Context) {
         fos.close()
         return newFile
     }
+
+    fun saveDocumentInDocuments(document: XWPFDocument): File {
+        val dir = Environment.getExternalStorageDirectory()
+        val newFile = File("${dir.path}/documents/application_${form.applicationRegNumber}.docx")
+        if (!newFile.exists()) {
+            newFile.createNewFile()
+        }
+        val fos = FileOutputStream(newFile)
+        document.write(fos)
+        fos.close()
+        return newFile
+    }
 }

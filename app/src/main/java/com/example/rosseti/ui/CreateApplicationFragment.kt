@@ -12,18 +12,23 @@ import com.example.rosseti.application.CategoryOfDigitalTransf
 import com.example.rosseti.application.Form
 import com.example.rosseti.application.ImplementationStep
 import com.example.rosseti.application.Spending
+import com.example.rosseti.application.generator.Generator
 import com.example.rosseti.application.qa.Answer
 import com.example.rosseti.application.qa.Question
 import com.example.rosseti.databinding.FragmentCreateAppBinding
+import com.example.rosseti.domain.entities.User
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayDeque
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CreateApplicationFragment : Fragment(), EnumDialog.Listener {
+class CreateApplicationFragment() : Fragment(), EnumDialog.Listener {
 
     @Inject
     lateinit var form: Form
+
+    @Inject
+    lateinit var user: User
 
     private var _binding: FragmentCreateAppBinding? = null
     private val binding
@@ -239,6 +244,12 @@ class CreateApplicationFragment : Fragment(), EnumDialog.Listener {
                 val list = (answer as Answer.EnumAnswer).answers
                 form.steps = list.mapIndexed { index, pair -> ImplementationStep(index + 1, pair.first, pair.second) }
             }
+            Question.RewardQuestion -> {
+                form.rewards[user] = "${(answer as Answer.Write).input}%"
+            }
+            Question.EconomyQuestion -> {
+                form.doesSaveMoney = (answer as Answer.Choice).triggerAnswer
+            }
         }
         if (questionsHARDCODED.isNotEmpty()) {
             setupQuestion(questionsHARDCODED.pop())
@@ -249,5 +260,9 @@ class CreateApplicationFragment : Fragment(), EnumDialog.Listener {
 
     private fun navigateToShareScreen() {
         // TODO замутить навигацию на экран создания заявки
+        form.authors.add(user)
+        val generator = Generator(form, requireContext())
+        val doc = generator.generateDocx()
+        generator.saveDocumentInDocuments(doc)
     }
 }

@@ -9,8 +9,10 @@ sealed class Question(val question: String, var isEnabled: Boolean = true) {
         const val ISSUE_DESC = "Опишите проблематику вашего рацпредложения с указанием существующих недостатков"
         const val ISSUE_SOLUTION = "Опишите ваше предалагаемое решение"
         const val ISSUE_EFFECT = "Какой положительный эффект вы ожидаете от данного решения (технический, организационный, управленческий или иной)?"
-        const val EXPENDITURES = "Укажите необходимые затраты"
-        const val STEPS = "Укажите требуемые сроки реализации"
+        const val EXPENDITURES = "Укажите необходимые затраты и их стоимость"
+        const val STEPS = "Укажите требуемые шаги для реализации и их длительность"
+        const val REWARD = "Укажите сколько процентов от вознаграждения вы бы хотели получить"
+        const val ECONOMY = "Несет ли ваше рацпредложение положительный экономический эффект?"
     }
     // OPENED
     open class WriteQuestion(question: String) : Question(question)
@@ -34,6 +36,8 @@ sealed class Question(val question: String, var isEnabled: Boolean = true) {
     object IssueEffectQuestion : WriteQuestion(ISSUE_EFFECT)
     object ExpendituresQuestion : EnumQuestion(EXPENDITURES)
     object StepsQuestion : EnumQuestion(STEPS)
+    object RewardQuestion : WriteQuestion(REWARD)
+    object EconomyQuestion : ChooseQuestion(ECONOMY)
 
     // Navigation
     class StageQuestion(
