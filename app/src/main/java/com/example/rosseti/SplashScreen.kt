@@ -3,8 +3,17 @@ package com.example.rosseti
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.rosseti.presentation.SplashPresenter
+import com.example.rosseti.presentation.SplashView
+import dagger.hilt.android.AndroidEntryPoint
+import moxy.presenter.InjectPresenter
 
-class SplashScreen : AppCompatActivity() {
+@AndroidEntryPoint
+class SplashScreen : AppCompatActivity(), SplashView {
+
+    @InjectPresenter
+    lateinit var presenter: SplashPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
