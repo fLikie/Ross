@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/menu_block_one"
-        android:title="First"/>
+        android:icon="@drawable/ic_chat"
+        android:title=""/>
 
     <item
         android:id="@+id/menu_block_two"
-        android:title="Second"/>
+        android:icon="@drawable/ic_group_newdoc"
+        android:title=""/>
 
     <item
         android:id="@+id/menu_block_three"
-        android:title="Third"/>
+        android:icon="@drawable/ic_docs"
+        android:title=""/>
 
     <item
         android:id="@+id/menu_block_four"
-        android:title="Fourth"/>
-
-    <item
-        android:id="@+id/menu_block_five"
-        android:title="Fifth"/>
+        android:icon="@drawable/ic_avatar"
+        android:title=""/>
 </menu>

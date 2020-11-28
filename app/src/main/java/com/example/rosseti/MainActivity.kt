@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity(): AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_CODE_WRITE = 10
@@ -35,7 +35,6 @@ class MainActivity(): AppCompatActivity() {
                     R.id.menu_block_two -> navController.navigate(R.id.go_to_form)
                     R.id.menu_block_three -> navController.navigate(R.id.go_to_reestr)
                     R.id.menu_block_four -> navController.navigate(R.id.go_to_accepted)
-                    R.id.menu_block_five -> navController.navigate(R.id.go_to_docs)
                 }
             }
             true
