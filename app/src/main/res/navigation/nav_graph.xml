@@ -6,6 +6,12 @@
     app:startDestination="@id/forumFragment">
 
     <fragment
+        android:id="@+id/createAppFragment"
+        android:name="com.example.rosseti.ui.CreateApplicationFragment"
+        android:label="create_app_fragment"
+        tools:layout="@layout/fragment_create_app"/>
+
+    <fragment
         android:id="@+id/forumFragment"
         android:name="com.example.rosseti.ForumFragment"
         android:label="fragment_forum"
