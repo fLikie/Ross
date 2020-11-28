@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/forumFragment">
+
+    <fragment
+        android:id="@+id/forumFragment"
+        android:name="com.example.rosseti.ForumFragment"
+        android:label="fragment_forum"
+        tools:layout="@layout/fragment_forum" />
+
+    <fragment
+        android:id="@+id/acceptedFragment"
+        android:name="com.example.rosseti.AcceptedFragment"
+        android:label="fragment_accepted"
+        tools:layout="@layout/fragment_accepted" />
+
+    <fragment
+        android:id="@+id/documentationsFragment"
+        android:name="com.example.rosseti.DocumentationsFragment"
+        android:label="fragment_documentations"
+        tools:layout="@layout/fragment_documentations" />
+
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.example.rosseti.FormFragment"
+        android:label="fragment_form"
+        tools:layout="@layout/fragment_form" />
+
+    <fragment
+        android:id="@+id/reestrFragment"
+        android:name="com.example.rosseti.ReestrFragment"
+        android:label="fragment_reestr"
+        tools:layout="@layout/fragment_reestr" />
+
+    <action
+        android:id="@+id/go_to_forum"
+        app:destination="@id/forumFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    <action
+        android:id="@+id/go_to_accepted"
+        app:destination="@id/acceptedFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    <action
+        android:id="@+id/go_to_docs"
+        app:destination="@id/documentationsFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    <action
+        android:id="@+id/go_to_reestr"
+        app:destination="@id/reestrFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    <action
+        android:id="@+id/go_to_form"
+        app:destination="@id/formFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+</navigation>
