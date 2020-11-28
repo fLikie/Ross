@@ -6,5 +6,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface AuthorizationView : MvpView {
-    fun auth()
+    fun showToast(text: String)
+    fun goToMain()
 }
