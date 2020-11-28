@@ -2,6 +2,7 @@ package com.example.rosseti.application.generator
 
 import android.content.Context
 import android.os.Environment
+import androidx.core.content.FileProvider
 import com.example.rosseti.R
 import com.example.rosseti.application.Form
 import com.example.rosseti.domain.entities.User
@@ -143,7 +144,7 @@ class Generator(private val form: Form, private val context: Context) {
 
     fun saveDocumentInDocuments(document: XWPFDocument): File {
         val dir = Environment.getExternalStorageDirectory()
-        val newFile = File("${dir.path}/documents/application_${form.applicationRegNumber}.docx")
+        val newFile = File("${dir.path}/Download/application_${form.applicationRegNumber}.docx")
         if (!newFile.exists()) {
             newFile.createNewFile()
         }
