@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayDeque
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class CreateApplicationFragment : Fragment() {
 
     @Inject
@@ -49,7 +48,6 @@ class CreateApplicationFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_create_app, container, false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCreateAppBinding.inflate(layoutInflater)
@@ -85,7 +83,11 @@ class CreateApplicationFragment : Fragment() {
                     sendAnswer(answer)
                 }
                 is Question.TimeQuestion -> {
-                    val text = "${binding.timepicker.hour}:${binding.timepicker.minute}"
+                    val text = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                        "${binding.timepicker.hour}:${binding.timepicker.minute}"
+                    } else {
+                        TODO("VERSION.SDK_INT < M")
+                    }
                     val answer = Answer.Write(text)
                     sendAnswer(answer)
                 }
