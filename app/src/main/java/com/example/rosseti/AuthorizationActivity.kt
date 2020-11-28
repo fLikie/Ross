@@ -1,25 +1,19 @@
 package com.example.rosseti
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import com.example.rosseti.api.LoginApi
 import com.example.rosseti.api.ProfileApi
-import com.example.rosseti.api.posts.LoginCredentials
 import com.example.rosseti.data.SessionManager
 import com.example.rosseti.presentation.AuthorizationPresenter
 import com.example.rosseti.presentation.AuthorizationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_authtorization.*
-import kotlinx.coroutines.*
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
 class AuthorizationActivity : MvpAppCompatActivity(), AuthorizationView {
