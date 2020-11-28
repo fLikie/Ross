@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_rectangle"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:background="@drawable/edit_text_rectangle"
+            android:layout_marginTop="27dp"
+            android:layout_marginStart="10dp"
+            android:paddingStart="8dp"
+            android:layout_marginEnd="10dp"
+            android:paddingEnd="8dp"
+            android:inputType="text"
+            android:drawablePadding="12dp"
+            android:drawableStart="@drawable/ic_lupa_zalupa"
+            android:drawableEnd="@drawable/ic_krest_huest"
+            android:hint="Найти нужную тему"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -28,7 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/main_bottom_menu"
-        app:labelVisibilityMode="unlabeled"
-        tools:ignore="LayoutElementIdWrongNameDetector" />
+        app:labelVisibilityMode="unlabeled" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

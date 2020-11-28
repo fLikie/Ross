@@ -13,31 +13,31 @@
 
     <fragment
         android:id="@+id/forumFragment"
-        android:name="com.example.rosseti.ForumFragment"
+        android:name="com.example.rosseti.ui.ForumFragment"
         android:label="fragment_forum"
         tools:layout="@layout/fragment_forum" />
 
     <fragment
         android:id="@+id/acceptedFragment"
-        android:name="com.example.rosseti.AcceptedFragment"
+        android:name="com.example.rosseti.ui.AcceptedFragment"
         android:label="fragment_accepted"
         tools:layout="@layout/fragment_accepted" />
 
     <fragment
         android:id="@+id/documentationsFragment"
-        android:name="com.example.rosseti.DocumentationsFragment"
+        android:name="com.example.rosseti.ui.DocumentationsFragment"
         android:label="fragment_documentations"
         tools:layout="@layout/fragment_documentations" />
 
     <fragment
         android:id="@+id/formFragment"
-        android:name="com.example.rosseti.FormFragment"
+        android:name="com.example.rosseti.ui.FormFragment"
         android:label="fragment_form"
         tools:layout="@layout/fragment_form" />
 
     <fragment
         android:id="@+id/reestrFragment"
-        android:name="com.example.rosseti.ReestrFragment"
+        android:name="com.example.rosseti.ui.ReestrFragment"
         android:label="fragment_reestr"
         tools:layout="@layout/fragment_reestr" />
 
