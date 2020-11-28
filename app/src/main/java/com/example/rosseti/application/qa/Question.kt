@@ -5,7 +5,7 @@ sealed class Question(val question: String, var isEnabled: Boolean = true) {
     private companion object QuestionTexts{
 
         const val SHORT_NAME = "Как бы вы описали ваше предложение в нескольких словах?"
-        const val CATEGORY = "Выберите к какой категории относится ваше предложение?"
+        const val CATEGORY = "Выберите к какой части цифровой трансформации относится ваше предложение?"
         const val ISSUE_DESC = "Опишите проблематику вашего рацпредложения с указанием существующих недостатков"
         const val ISSUE_SOLUTION = "Опишите ваше предалагаемое решение"
         const val ISSUE_EFFECT = "Какой положительный эффект вы ожидаете от данного решения (технический, организационный, управленческий или иной)?"

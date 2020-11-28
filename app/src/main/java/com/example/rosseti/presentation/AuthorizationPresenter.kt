@@ -1,5 +1,6 @@
 package com.example.rosseti.presentation
 
+import android.util.Log
 import com.example.rosseti.api.LoginApi
 import com.example.rosseti.api.TopicsApi
 import com.example.rosseti.api.posts.LoginCredentials
@@ -30,10 +31,10 @@ class AuthorizationPresenter @Inject constructor(
         }
         viewState.showLoading(true)
         presenterScope.launch(Dispatchers.Default) {
+            viewState.goToMain() // todo убери
             val token = loginApi.login(LoginCredentials(login, password))
             if (token.isNotBlank()) {
                 sessionManager.saveAuthToken(token)
-                topicsApi.getAllTopics()
             }
             withContext(Dispatchers.Main) {
                 viewState.showLoading(false)

@@ -39,12 +39,7 @@ class MultipleChoiceAdapter(private val onAnyItemSelected: (Boolean) -> Unit) : 
 
         init {
             textView.setOnClickListener {
-                val visibility = when (textView.visibility) {
-                    View.VISIBLE -> View.GONE
-                    else -> View.VISIBLE
-                }
-                textView.visibility = visibility
-                val isActive = visibility == View.VISIBLE
+                val isActive = !textView.isActivated
                 val info = data.removeAt(adapterPosition).copy(third = isActive)
                 data.add(adapterPosition, info)
                 onAnyItemSelected(data.any { it.third })

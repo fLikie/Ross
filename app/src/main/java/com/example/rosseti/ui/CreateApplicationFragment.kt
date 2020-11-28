@@ -1,15 +1,17 @@
 package com.example.rosseti.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.rosseti.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rosseti.application.CategoryOfDigitalTransf
 import com.example.rosseti.application.Form
+import com.example.rosseti.application.ImplementationStep
+import com.example.rosseti.application.Spending
 import com.example.rosseti.application.qa.Answer
 import com.example.rosseti.application.qa.Question
 import com.example.rosseti.databinding.FragmentCreateAppBinding
@@ -18,12 +20,14 @@ import java.util.ArrayDeque
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CreateApplicationFragment : Fragment() {
+class CreateApplicationFragment : Fragment(), EnumDialog.Listener {
 
     @Inject
     lateinit var form: Form
 
-    private lateinit var binding: FragmentCreateAppBinding
+    private var _binding: FragmentCreateAppBinding? = null
+    private val binding
+        get() = _binding!!
 
     val questionsHARDCODED = ArrayDeque(
         listOf(
@@ -39,23 +43,23 @@ class CreateApplicationFragment : Fragment() {
 
     var currentQuestion: Question? = null
     private lateinit var multipleChoiceAdapter: MultipleChoiceAdapter
+    private lateinit var enumChoiceAdapter: EnumChoiceAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_create_app, container, false)
+    ): View {
+        _binding = FragmentCreateAppBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentCreateAppBinding.inflate(layoutInflater)
         multipleChoiceAdapter = MultipleChoiceAdapter { isAnyItemSelected ->
             binding.helpLayoutButtonContinue.isEnabled = isAnyItemSelected
         }
-        binding.multipleChoice.adapter = multipleChoiceAdapter
-        binding.multipleChoice.layoutManager = GridLayoutManager(requireContext(), 2)
+        enumChoiceAdapter = EnumChoiceAdapter()
         binding.helpLayoutButtonVariantA.setOnClickListener {
             val mCurrentQuestion = currentQuestion
             if (mCurrentQuestion is Question.ChooseQuestion) {
@@ -91,14 +95,29 @@ class CreateApplicationFragment : Fragment() {
                     sendAnswer(answer)
                 }
                 is Question.MultipleChoiceQuestion -> sendAnswer(Answer.MultipleChoice(multipleChoiceAdapter.getData()))
-                is Question.EnumQuestion -> TODO()
+                is Question.EnumQuestion -> sendAnswer(Answer.EnumAnswer(enumChoiceAdapter.getData()))
                 null -> TODO()
             }
+        }
+        binding.addEnumAnswer.setOnClickListener {
+            EnumDialog().show(childFragmentManager, currentQuestion?.question)
         }
         if (savedInstanceState == null) {
             val question = questionsHARDCODED.pop()
             setupQuestion(question)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onEnumAdded(description: String, sum: Long) {
+        val data = enumChoiceAdapter.getData().toMutableList().apply {
+            add(description to sum)
+        }
+        enumChoiceAdapter.setData(data.toList())
     }
 
     private fun setupQuestion(question: Question) {
@@ -111,6 +130,7 @@ class CreateApplicationFragment : Fragment() {
                 is Question.DateQuestion -> setupDateQuestion()
                 is Question.TimeQuestion -> setupTimeQuestion()
                 is Question.MultipleChoiceQuestion -> setupMultipleChoiceQuestion(question)
+                is Question.EnumQuestion -> setupEnumQuestion()
             }
         } else {
             if (questionsHARDCODED.isNotEmpty()) {
@@ -126,7 +146,8 @@ class CreateApplicationFragment : Fragment() {
         binding.helpLayoutButtonContinue.visibility = View.GONE
         binding.datepicker.visibility = View.GONE
         binding.timepicker.visibility = View.GONE
-        binding.multipleChoice.visibility = View.GONE
+        binding.recyclerView.visibility = View.GONE
+        binding.addEnumAnswer.visibility = View.GONE
         binding.helpLayoutLinearlayoutVariantHolder.visibility = View.VISIBLE
         binding.helpLayoutButtonVariantA.text = question.answers.first().text
         binding.helpLayoutButtonVariantB.text = question.answers.last().text
@@ -136,7 +157,8 @@ class CreateApplicationFragment : Fragment() {
         binding.helpLayoutLinearlayoutVariantHolder.visibility = View.GONE
         binding.datepicker.visibility = View.GONE
         binding.timepicker.visibility = View.GONE
-        binding.multipleChoice.visibility = View.GONE
+        binding.recyclerView.visibility = View.GONE
+        binding.addEnumAnswer.visibility = View.GONE
         binding.helpLayoutButtonContinue.visibility = View.VISIBLE
         binding.helpLayoutEdittextAnswer.visibility = View.VISIBLE
     }
@@ -145,24 +167,42 @@ class CreateApplicationFragment : Fragment() {
         binding.helpLayoutLinearlayoutVariantHolder.visibility = View.GONE
         binding.helpLayoutEdittextAnswer.visibility = View.GONE
         binding.timepicker.visibility = View.GONE
-        binding.multipleChoice.visibility = View.GONE
+        binding.recyclerView.visibility = View.GONE
+        binding.addEnumAnswer.visibility = View.GONE
         binding.datepicker.visibility = View.VISIBLE
     }
 
     private fun setupTimeQuestion() {
         binding.helpLayoutLinearlayoutVariantHolder.visibility = View.GONE
         binding.helpLayoutEdittextAnswer.visibility = View.GONE
-        binding.multipleChoice.visibility = View.GONE
+        binding.recyclerView.visibility = View.GONE
+        binding.addEnumAnswer.visibility = View.GONE
         binding.timepicker.visibility = View.VISIBLE
         binding.datepicker.visibility = View.GONE
     }
 
     private fun setupMultipleChoiceQuestion(question: Question.MultipleChoiceQuestion) {
         binding.helpLayoutLinearlayoutVariantHolder.visibility = View.GONE
+        binding.helpLayoutEdittextAnswer.visibility = View.GONE
         binding.datepicker.visibility = View.GONE
         binding.timepicker.visibility = View.GONE
-        binding.multipleChoice.visibility = View.VISIBLE
+        binding.addEnumAnswer.visibility = View.GONE
+        binding.recyclerView.visibility = View.VISIBLE
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.adapter = multipleChoiceAdapter
         multipleChoiceAdapter.setData(question.answer.answers)
+    }
+
+    private fun setupEnumQuestion() {
+        binding.helpLayoutLinearlayoutVariantHolder.visibility = View.GONE
+        binding.helpLayoutEdittextAnswer.visibility = View.GONE
+        binding.datepicker.visibility = View.GONE
+        binding.timepicker.visibility = View.GONE
+        binding.addEnumAnswer.visibility = View.VISIBLE
+        binding.recyclerView.visibility = View.VISIBLE
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = enumChoiceAdapter
+        enumChoiceAdapter.setData(emptyList())
     }
 
     private fun sendAnswer(answer: Answer) {
@@ -181,6 +221,23 @@ class CreateApplicationFragment : Fragment() {
                     }
                 }
                 form.categories = result
+            }
+            Question.IssueDescriptionQuestion -> {
+                form.issueDescription = (answer as Answer.Write).input
+            }
+            Question.IssueSolutionQuestion -> {
+                form.issueSolution = (answer as Answer.Write).input
+            }
+            Question.IssueEffectQuestion -> {
+                form.issueEffect = (answer as Answer.Write).input
+            }
+            Question.ExpendituresQuestion -> {
+                val list = (answer as Answer.EnumAnswer).answers
+                form.expenditures = list.mapIndexed { index, pair ->  Spending(index + 1, pair.first, pair.second) }
+            }
+            Question.StepsQuestion -> {
+                val list = (answer as Answer.EnumAnswer).answers
+                form.steps = list.mapIndexed { index, pair -> ImplementationStep(index + 1, pair.first, pair.second) }
             }
         }
         if (questionsHARDCODED.isNotEmpty()) {

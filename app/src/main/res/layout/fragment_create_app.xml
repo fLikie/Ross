@@ -16,7 +16,9 @@
         android:layout_weight="1"
         android:layout_gravity="center"
         android:gravity="center"
-        android:maxLines="3"
+        android:maxLines="5"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,9 +85,18 @@
         android:hint="Введите ваш ответ здесь"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/multiple_choice"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
+        android:layout_weight="3"
         android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_enum_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:src="@android:drawable/ic_menu_add"
+        android:layout_gravity="end"/>
 
     <Button
         android:id="@+id/help_layout_button_continue"

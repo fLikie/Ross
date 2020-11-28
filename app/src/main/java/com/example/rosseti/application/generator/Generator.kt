@@ -99,7 +99,7 @@ class Generator(private val form: Form, private val context: Context) {
                     }
                     Holders.SPEND_SUM -> {
                         val index = getIndexIfPresent(text)
-                        index?.let { form.expenditures[index].sum.toPlainString() } ?: ""
+                        index?.let { form.expenditures[index].sum.toString() } ?: ""
                     }
                     Holders.STEP_NUM -> {
                         text.getOrNull(1) ?: ""
