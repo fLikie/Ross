@@ -6,4 +6,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface SplashView : MvpView {
+    fun goToMain()
+    fun goToLogin()
 }
