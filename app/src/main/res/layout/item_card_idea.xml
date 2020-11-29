@@ -175,6 +175,7 @@
         app:layout_constraintStart_toEndOf="@id/views_icon"
         app:layout_constraintTop_toTopOf="@+id/views_icon" />
     <TextView
+        android:id="@+id/more_info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Подробнее"

@@ -15,6 +15,8 @@ class ProblemsFragment : Fragment() {
     private val binding
         get() = _binding!!
 
+    private lateinit var adapter: ProblemsAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +28,9 @@ class ProblemsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ideasRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.ideasRecyclerView.adapter = ProblemsAdapter()
+        adapter = ProblemsAdapter {
+
+        }
+        binding.ideasRecyclerView.adapter = adapter
     }
 }

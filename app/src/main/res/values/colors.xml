@@ -14,4 +14,6 @@
     <color name="blue_light">#D3E4FB</color>
     <color name="blue_light_background">#F5F5FF</color>
     <color name="black">#000000</color>
+    <color name="dark_gray">#2C2C2C</color>
+    <color name="transparent_blue">#70D3E4FB</color>
 </resources>

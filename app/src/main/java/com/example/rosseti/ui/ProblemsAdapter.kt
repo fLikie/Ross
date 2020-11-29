@@ -10,8 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rosseti.R
 import kotlin.random.Random
 
-class ProblemsAdapter : RecyclerView.Adapter<ProblemsAdapter.ProblemsVH>() {
-    val data = if (Random.nextBoolean()) listOf(1,2,3,4,5) else listOf(1,2)
+class ProblemsAdapter(val onCardClickListener: (() -> Unit)? = null) : RecyclerView.Adapter<ProblemsAdapter.ProblemsVH>() {
+    val data = mutableListOf<Int>().apply {
+        val times = Random.nextInt(1,5)
+        repeat(times) {
+            add(1)
+        }
+    }
 
     val nameList = listOf("Николай", "Сергей", "Владимир", "Иван", "Петр")
     val lastNameList = listOf("Петров", "Иванов", "Кузнецов", "Егоров", "Максимов")
@@ -33,8 +38,12 @@ class ProblemsAdapter : RecyclerView.Adapter<ProblemsAdapter.ProblemsVH>() {
         val viewsCountTextView: TextView = itemView.findViewById(R.id.views_counter)
         val arrowUpButton: ImageView = itemView.findViewById(R.id.rating_up)
         val arrowDownButton: ImageView = itemView.findViewById(R.id.rating_down)
+        val moreInfoButton: TextView = itemView.findViewById(R.id.more_info_button)
 
         init {
+            moreInfoButton.setOnClickListener {
+                onCardClickListener?.invoke()
+            }
             arrowUpButton.setOnClickListener {
                 Toast.makeText(itemView.context, "Вы проголосовали за", Toast.LENGTH_SHORT).show()
             }
