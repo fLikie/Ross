@@ -3,7 +3,10 @@ package com.example.rosseti.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rosseti.R
 import kotlin.random.Random
@@ -29,7 +32,17 @@ class ProblemsAdapter : RecyclerView.Adapter<ProblemsAdapter.ProblemsVH>() {
         val nameTextView: TextView = itemView.findViewById(R.id.name)
         val dateTextView: TextView = itemView.findViewById(R.id.publication_date)
         val viewsCountTextView: TextView = itemView.findViewById(R.id.views_counter)
+        val arrowUpButton: ImageView = itemView.findViewById(R.id.rating_up)
+        val arrowDownButton: ImageView = itemView.findViewById(R.id.rating_down)
 
+        init {
+            arrowUpButton.setOnClickListener {
+                Toast.makeText(itemView.context, "Вы проголосовали за", Toast.LENGTH_SHORT).show()
+            }
+            arrowDownButton.setOnClickListener {
+                Toast.makeText(itemView.context, "Вы проголосовали против", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         fun bind(position: Int) {
             val randomRating = Random.nextInt(0,99)
