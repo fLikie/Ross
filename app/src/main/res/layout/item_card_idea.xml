@@ -96,22 +96,36 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="Уровень доверия в команде, работающей удаленно, должен быть намного выше, чем в стандартном..." />
 
-    <include
-        android:id="@+id/first_tag"
-        layout="@layout/item_tag_card_idea"
+    <TextView
+        android:id="@+id/tag_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="2dp"
+        android:background="@drawable/clickable_rectangle_rounded"
+        android:backgroundTint="@color/blue_light"
+        android:textColor="@color/colorPrimary"
+        android:textSize="9sp"
+        android:text="Эксплуатация подстанций"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintStart_toStartOf="parent"/>
-    <include
-        layout="@layout/item_tag_card_idea"
+
+    <TextView
+        android:id="@+id/tag_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        app:layout_constraintStart_toEndOf="@id/first_tag"/>
+        android:background="@drawable/clickable_rectangle_rounded"
+        android:backgroundTint="@color/blue_light"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="2dp"
+        android:text="еще тег"
+        android:textColor="@color/colorPrimary"
+        android:textSize="9sp"
+        app:layout_constraintStart_toEndOf="@+id/tag_first"
+        app:layout_constraintTop_toBottomOf="@id/description" />
     <ImageView
         android:id="@+id/comment_icon"
         android:layout_width="wrap_content"
@@ -119,7 +133,7 @@
         android:src="@drawable/ic_comment"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/first_tag"/>
+        app:layout_constraintTop_toBottomOf="@id/tag_first"/>
 
     <TextView
         android:id="@+id/comment_counter"
@@ -164,7 +178,7 @@
         android:textSize="12sp"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/first_tag"/>
+        app:layout_constraintTop_toBottomOf="@id/tag_first"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
