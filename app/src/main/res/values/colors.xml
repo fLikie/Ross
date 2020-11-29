@@ -11,5 +11,6 @@
     <color name="gray_80">#505050</color>
     <color name="newBlue">#6C92F4</color>
     <color name="blue_light">#D3E4FB</color>
+    <color name="blue_light_background">#F5F5FF</color>
     <color name="black">#000000</color>
 </resources>

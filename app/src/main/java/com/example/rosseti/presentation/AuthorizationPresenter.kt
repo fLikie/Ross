@@ -31,7 +31,6 @@ class AuthorizationPresenter @Inject constructor(
         }
         viewState.showLoading(true)
         presenterScope.launch(Dispatchers.Default) {
-            viewState.goToMain() // todo убери
             val token = loginApi.login(LoginCredentials(login, password))
             if (token.isNotBlank()) {
                 sessionManager.saveAuthToken(token)
