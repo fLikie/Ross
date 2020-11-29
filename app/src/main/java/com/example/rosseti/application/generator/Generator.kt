@@ -39,13 +39,13 @@ class Generator(private val form: Form, private val context: Context) {
                         format.format(Date())
                     }
                     Holders.ORGANIZATION_NAME -> {
-                        form.authors.getOrNull(0)?.organizationName ?: ""
+                        form.authors[0].organizationName ?: ""
                     }
                     Holders.AUTHOR_FULL_NAME -> {
-                        getCurrentUserIfPresent(text)?.fullName ?: ""
+                        form.authors[0].fullName
                     }
                     Holders.AUTHOR_NUMBER -> {
-                        text.getOrNull(1) ?: ""
+                        "1"
                     }
                     Holders.AUTHOR_REWARD -> {
                         val index = getIndexIfPresent(text)
@@ -56,30 +56,45 @@ class Generator(private val form: Form, private val context: Context) {
                         }
                     }
                     Holders.POSITION -> {
-                        getCurrentUserIfPresent(text)?.position ?: ""
+                        form.authors[0]?.position ?: ""
                     }
                     Holders.STRUCTURE_NAME -> {
-                        getCurrentUserIfPresent(text)?.structureName ?: ""
+                        form.authors[0]?.structureName ?: ""
                     }
                     Holders.BACKGROUND -> {
-                        getCurrentUserIfPresent(text)?.education ?: ""
+                        form.authors[0]?.education ?: ""
                     }
                     Holders.BIRTH_YEAR -> {
-                        val user = getCurrentUserIfPresent(text)
+                        val user = form.authors[0]
                         val format = SimpleDateFormat("yyyy")
                         val date = user?.birthdate
                         date?.let { format.format(date) } ?: ""
                     }
                     Holders.EXPERIENCE -> {
-                        val user = getCurrentUserIfPresent(text)
+                        val user = form.authors[0]
                         val format = SimpleDateFormat("yyyy")
                         val date = user?.dateOfEmployment
                         date?.let { "С ${format.format(date)} года" } ?: ""
                     }
                     Holders.SHORT_NAME -> { form.shortname }
-                    Holders.CATEGORY_CHECK_BOX -> {
-                        val index = getIndexIfPresent(text)
-                        val category = form.categories.find { it.id == index }
+                    Holders.CATEGORY_CHECK_BOX1 -> {
+                        val category = form.categories.find { it.id == 0 }
+                        if (category != null) FILLED_CHECK_BOX else UNFILLED_CHECK_BOX
+                    }
+                    Holders.CATEGORY_CHECK_BOX2 -> {
+                        val category = form.categories.find { it.id == 1 }
+                        if (category != null) FILLED_CHECK_BOX else UNFILLED_CHECK_BOX
+                    }
+                    Holders.CATEGORY_CHECK_BOX3 -> {
+                        val category = form.categories.find { it.id == 2 }
+                        if (category != null) FILLED_CHECK_BOX else UNFILLED_CHECK_BOX
+                    }
+                    Holders.CATEGORY_CHECK_BOX4 -> {
+                        val category = form.categories.find { it.id == 3 }
+                        if (category != null) FILLED_CHECK_BOX else UNFILLED_CHECK_BOX
+                    }
+                    Holders.CATEGORY_CHECK_BOX5 -> {
+                        val category = form.categories.find { it.id == 4 }
                         if (category != null) FILLED_CHECK_BOX else UNFILLED_CHECK_BOX
                     }
                     Holders.ISSUE_DESCRIPTION -> {
@@ -89,29 +104,31 @@ class Generator(private val form: Form, private val context: Context) {
                         form.issueSolution
                     }
                     Holders.ISSUE_EFFECT -> {
-                        form.issueSolution
+                        form.issueEffect
                     }
                     Holders.SPEND_NUMBER -> {
-                        text.getOrNull(1) ?: ""
+                        "1"
                     }
                     Holders.SPEND_NAME -> {
-                        val index = getIndexIfPresent(text)
-                        index?.let { form.expenditures[index].name } ?: ""
+                        form.expenditures[0].name
                     }
                     Holders.SPEND_SUM -> {
-                        val index = getIndexIfPresent(text)
-                        index?.let { form.expenditures[index].sum.toString() } ?: ""
+                        form.expenditures[0].sum.toString()
                     }
                     Holders.STEP_NUM -> {
-                        text.getOrNull(1) ?: ""
+                        "1"
                     }
                     Holders.STEP_NAME -> {
-                        val index = getIndexIfPresent(text)
-                        index?.let { form.steps[index].name } ?: ""
+                        form.steps[0].name
                     }
                     Holders.STEP_PERIOD -> {
-                        val index = getIndexIfPresent(text)
-                        index?.let { form.steps[index].period.toString() } ?: ""
+                        form.steps[0].period.toString()
+                    }
+                    Holders.ECONOMY_CHECK_BOX1 -> {
+                        if (form.doesSaveMoney) { FILLED_CHECK_BOX} else UNFILLED_CHECK_BOX
+                    }
+                    Holders.ECONOMY_CHECK_BOX2 -> {
+                        if (form.doesSaveMoney) { UNFILLED_CHECK_BOX} else FILLED_CHECK_BOX
                     }
                     else -> ""
                 }
@@ -144,7 +161,7 @@ class Generator(private val form: Form, private val context: Context) {
 
     fun saveDocumentInDocuments(document: XWPFDocument): File {
         val dir = Environment.getExternalStorageDirectory()
-        val newFile = File("${dir.path}/Download/application_${form.applicationRegNumber}.docx")
+        val newFile = File("${dir.path}/documents/application_${form.applicationRegNumber}.docx")
         if (!newFile.exists()) {
             newFile.createNewFile()
         }
