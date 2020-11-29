@@ -2,7 +2,7 @@
 
 Ссылка на репозиторий с бэкэндом - https://github.com/fLikie/RossBack
 
-По ссылке - https://drive.google.com/drive/folders/1-7t2ut00ry39Z55IZ5qSvDrV593ezfMV необходимо скачать APK файл по названием app-debug и установить его себе на телефон.
+По ссылке - https://drive.google.com/drive/folders/1-7t2ut00ry39Z55IZ5qSvDrV593ezfMV необходимо скачать APK файл по названием app-debug и установить его себе на телефон. Подробные инстркуции можно найти в интернете: https://androidinsider.ru/eto-interesno/kak-ustanovit-fajl-apk-na-android.html Также можно с телефона зайти на сслыку в облако, скачать сразу на телефон апк и установить его.
 
 Если у вас нет устройства с ОС Android, вы можете скачать эмулятор Android и установить приложение туда. Надеемся Вам понравится.
 
