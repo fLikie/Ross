@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rosseti.R
 import kotlin.random.Random
 
 class ProblemsAdapter : RecyclerView.Adapter<ProblemsAdapter.ProblemsVH>() {
-    val data = listOf(1,2,3,4,5)
+    val data = if (Random.nextBoolean()) listOf(1,2,3,4,5) else listOf(1,2)
 
     val nameList = listOf("Николай", "Сергей", "Владимир", "Иван", "Петр")
     val lastNameList = listOf("Петров", "Иванов", "Кузнецов", "Егоров", "Максимов")
