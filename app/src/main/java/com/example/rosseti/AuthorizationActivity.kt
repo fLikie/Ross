@@ -44,7 +44,7 @@ class AuthorizationActivity : MvpAppCompatActivity(), AuthorizationView {
     }
 
     override fun goToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, ChooseTagsActivity::class.java))
     }
 
     override fun showLoading(show: Boolean) {
