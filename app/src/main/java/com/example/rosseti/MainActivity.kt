@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
         new_doc.setOnClickListener {
+            Toast.makeText(this, "Тут будет добавление идей", Toast.LENGTH_SHORT).show()
+        }
+        add_predl.setOnClickListener {
             navController.navigate(R.id.go_to_create_app)
         }
         if (checkWritePermission()) {
