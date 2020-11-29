@@ -1,5 +1,6 @@
 package com.example.rosseti
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -38,6 +39,10 @@ class ChooseTagsActivity : MvpAppCompatActivity(), ChooseTagsView {
         setContentView(R.layout.activity_choose_tags)
         tags_recycler_view.layoutManager = LinearLayoutManager(this)
         tags_recycler_view.adapter = chooseTagsAdapter
+
+        button.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
     override fun showLoading(show: Boolean) {
